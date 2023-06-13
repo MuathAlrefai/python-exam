@@ -1,5 +1,5 @@
 from django.db import models
-from login_app.models import User
+from login_app.models import User, Validator
 
 class PyPie(models.Model):
     name = models.CharField(max_length=255)
@@ -10,6 +10,8 @@ class PyPie(models.Model):
     user_voted = models.ManyToManyField(User, related_name='voted_pies')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = Validator()
 
 def add_pie_model(request):
     user = User.objects.get(id=request.session['userid'])

@@ -36,11 +36,21 @@
             <h1>Add new PyPie</h1>
             <form action="/add_pie" method="POST">
                 {% csrf_token %}
-                <label for="pie_name">Name: <input type="text" name="pie_name" placeholder="Enter Pie Name" class="textBoxes"></label><br>
-                <label for="pie_filling">Filling: <input type="text" name="pie_filling"
-                        placeholder="Enter Pie Filling" class="textBoxes"></label><br>
-                <label for="pie_crust">Crust: <input type="text" name="pie_crust"
-                        placeholder="Enter Pie Crust" class="textBoxes"></label><br>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                        {{message}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <label for="pie_name">Name: <input type="text" name="pie_name" placeholder="Enter Pie Name"
+                        class="textBoxes"></label><br>
+                <label for="pie_filling">Filling: <input type="text" name="pie_filling" placeholder="Enter Pie Filling"
+                        class="textBoxes"></label><br>
+                <label for="pie_crust">Crust: <input type="text" name="pie_crust" placeholder="Enter Pie Crust"
+                        class="textBoxes"></label><br>
                 <button type="submit" class="btn">Add Pie</button>
             </form>
         </div>

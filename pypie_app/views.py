@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . import models
+from django.contrib import messages
 
 def pypie(request):
     context = {
@@ -9,8 +10,14 @@ def pypie(request):
     return render(request, 'pypie.html', context)
 
 def add_pie(request):
-    models.add_pie_model(request)
-    return redirect('/pypie')
+    errors = models.PyPie.objects.pie_validator(request.POST)
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect('/pypie')
+    else:
+        models.add_pie_model(request)
+        return redirect('/pypie')
 
 def render_edit_pie(request, ID):
     context = {

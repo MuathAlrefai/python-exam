@@ -15,7 +15,13 @@ def register(request):
         return models.register_model(request)
 
 def login(request):
-    return models.login_model(request)
+    errors = models.User.objects.login_validator(request.POST)
+    if len(errors) > 0:
+        for k, v in errors.items():
+            messages.error(request, v)
+        return redirect('/')
+    else:
+        return models.login_model(request)
 
 
 def logout(request):

@@ -29,8 +29,29 @@ class Validator(models.Manager):
             errors['password'] = "Password must be at least 8 characters"
         if post_data['password'] != post_data['confirm_password'] :
             errors['confirm_password'] = "Your password didn't match!"
-        
         return errors
+    
+    def pie_validator(self, post_data):
+        errors = {}
+        if len(post_data['pie_name']) < 3:
+            errors['pie_name'] = "Your pie name must be at least 3 characters"
+        if len(post_data['pie_filling']) < 5:
+            errors['pie_filling'] = "Your pie filling must be at least 5 characters"
+        if len(post_data['pie_crust']) < 5:
+            errors['pie_crust'] = "Your pie crust must be at least 5 characters"
+        return errors
+    
+    def login_validator(self, post_data):
+        errors = {}
+        db_emails = User.objects.filter(email = post_data['email'])
+        if len(db_emails) == 0:
+            errors['email'] = "This Email doesn't exist!"
+        if len(post_data['email']) < 1:
+            errors['email'] = "You must enter email address"
+        if len(post_data['log_password']) < 1:
+            errors['log_password'] = "you must enter password"
+        return errors
+
 
 class User(models.Model):
     first_name = models.CharField(max_length=255)
