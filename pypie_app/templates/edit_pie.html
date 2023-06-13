@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pypie/style.css' %}" />
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/pypie" class="anchor">Main Page</a>
+        <a href="/logout" class="anchor">Logout</a>
+    </div>
+    <div class="pie_edit">
+        <h1>Edit {{pie.name}}</h1>
+        <form action="/update" method="POST">
+            {% csrf_token %}
+            <label for="pie_name">Name: <input type="text" name="pie_name" class="textBoxes"
+                    value="{{pie.name}}"></label><br>
+            <label for="pie_filling">Filling: <input type="text" name="pie_filling" class="textBoxes"
+                    value="{{pie.filling}}"></label><br>
+            <label for="pie_crust">Crust: <input type="text" name="pie_crust" class="textBoxes"
+                    value="{{pie.crust}}"></label><br>
+            <input type="hidden" name="pie_id" value="{{pie.id}}">
+            <button type="submit" class="btn">Edit Pie</button>
+        </form>
+    </div>
+</body>
+
+</html>

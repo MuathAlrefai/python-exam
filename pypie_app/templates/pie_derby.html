@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derby</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pypie/style.css' %}" />
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/pypie" class="btn">Main Page</a>
+        <a href="/logout" class="anchor">Logout</a>
+    </div>
+    <div class="derby">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Pie By</th>
+                <th>Votes</th>
+            </tr>
+            {% for pie in pies %}
+            <tr>
+                <td><a href="/show/{{pie.id}}">{{pie.name}}</a></td>
+                <td>{{pie.user.first_name.title}} {{pie.user.last_name.title}}</td>
+                <td>{{pie.votes}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>

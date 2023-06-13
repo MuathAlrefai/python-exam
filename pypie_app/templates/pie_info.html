@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view pie</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'pypie/style.css' %}" />
+</head>
+
+<body>
+    <div class="info_box">
+        <h1>{{pie.name}} By {{user.first_name.title}} {{user.last_name.title}} </h1><br>
+        <p>{{pie.filling}}</p><br>
+        <p>{{pie.crust}}</p><br>
+        <p><b>Cast a Vote: </b></p><br>
+        {% if user in pie.user_voted.all %}
+        <a href="/remove_vote/{{pie.id}}" class="btn">Yuck</a>
+        {% else %}
+        <a href="/add_vote/{{pie.id}}" class="btn">Delicious</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>
